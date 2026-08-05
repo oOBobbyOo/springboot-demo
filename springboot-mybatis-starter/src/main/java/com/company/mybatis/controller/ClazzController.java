@@ -23,12 +23,12 @@ public class ClazzController {
     return clazzService.createClass(clazz);
   }
 
-  @PutMapping
+  @PutMapping("/{id}")
   public Clazz update(@PathVariable Integer id, @RequestBody Clazz clazz) {
     return clazzService.updateClass(id, clazz);
   }
 
-  @DeleteMapping
+  @DeleteMapping("/{id}")
   public String delete(@PathVariable Integer id) {
     clazzService.deleteClass(id);
     return "删除成功";
