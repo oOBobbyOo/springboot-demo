@@ -1,0 +1,29 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: mybatis-starter
+
+  devtools:
+    restart:
+      enabled: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/mybatis_db?characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+
+mybatis:
+  #  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.company.mybatis.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.company.mybatis.mapper: debug

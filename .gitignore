@@ -1,5 +1,10 @@
 HELP.md
 target/
+test/
+.mvn/
+mvnw*
+**/.gitignore
+**/.gitattributes
 
 ### IntelliJ IDEA ###
 .idea
