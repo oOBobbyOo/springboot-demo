@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.mybatis.mapper.UserMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="UserResultMap" type="com.company.mybatis.entity.User">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" resultMap="UserResultMap">
+        SELECT id, user_name, create_time, update_time
+        FROM users
+        WHERE id = #{id}
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="selectAll" resultMap="UserResultMap">
+        SELECT id, user_name, create_time, update_time
+        FROM users
+    </select>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.company.mybatis.entity.User">
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO users (user_name, create_time, update_time)
+        VALUES (#{userName}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!-- 更新 -->
+    <update id="updateById" parameterType="com.company.mybatis.entity.User">
+        UPDATE users
+        SET user_name = #{userName},
+            update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteById">
+        DELETE FROM users WHERE id = #{id}
+    </delete>
+
+    <!-- 动态SQL：条件查询 -->
+    <select id="selectByCondition" resultMap="UserResultMap">
+        SELECT id, user_name
+        FROM users
+        <where>
+            <if test="userName != null and userName != ''">
+                AND user_name LIKE CONCAT('%', #{userName}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>
