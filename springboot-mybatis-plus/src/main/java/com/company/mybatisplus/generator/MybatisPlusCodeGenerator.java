@@ -47,7 +47,7 @@ public class MybatisPlusCodeGenerator {
             builder ->
                 builder
                     // 作者
-                    .author("henry")
+                    .author("Henry")
                     // 输出目录
                     .outputDir(JAVA_PATH)
                     // 注释日期格式

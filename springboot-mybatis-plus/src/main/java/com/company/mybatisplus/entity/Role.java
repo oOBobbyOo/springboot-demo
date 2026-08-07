@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  * 角色表
  * </p>
  *
- * @author henry
+ * @author Henry
  * @since 2026-08-07
  */
 @Getter

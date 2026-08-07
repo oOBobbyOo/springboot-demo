@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.spring.service.IService;
  * 角色表 服务类
  * </p>
  *
- * @author henry
+ * @author Henry
  * @since 2026-08-07
  */
 public interface RoleService extends IService<Role> {

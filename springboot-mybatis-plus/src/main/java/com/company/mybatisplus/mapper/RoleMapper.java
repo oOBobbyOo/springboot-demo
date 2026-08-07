@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 角色表 Mapper 接口
  * </p>
  *
- * @author henry
+ * @author Henry
  * @since 2026-08-07
  */
 @Mapper
