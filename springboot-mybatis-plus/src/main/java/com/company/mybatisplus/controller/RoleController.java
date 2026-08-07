@@ -1,5 +1,6 @@
 package com.company.mybatisplus.controller;
 
+import com.company.mybatisplus.common.Result;
 import com.company.mybatisplus.entity.Role;
 import com.company.mybatisplus.service.RoleService;
 import java.util.List;
@@ -25,63 +26,72 @@ public class RoleController {
    * 新增角色
    *
    * @param role 角色信息
+   * @return 操作结果
    */
   @PostMapping("/add")
-  public String add(@RequestBody Role role) {
+  public Result<Void> save(@RequestBody Role role) {
     boolean success = roleService.save(role);
-    return success ? "新增成功" : "新增失败";
+    return success ? Result.success("新增角色成功") : Result.error("新增角色失败");
   }
 
   /**
-   * 根据ID删除角色
+   * 根据角色ID删除角色
    *
-   * @param id 角色id
+   * @param id 角色ID
+   * @return 操作结果
    */
   @DeleteMapping("/delete/{id}")
-  public String delete(@PathVariable Long id) {
+  public Result<Void> delete(@PathVariable Long id) {
     boolean success = roleService.removeById(id);
-    return success ? "删除成功" : "删除失败";
+    return success ? Result.success("删除角色成功") : Result.error("删除角色失败");
   }
 
   /**
    * 批量删除角色
    *
-   * @param ids 角色id列表，例如 [1, 2]
+   * <p>根据传入的角色 ID 集合，批量删除对应的角色信息
+   *
+   * @param ids 角色 ID 集合，请求体参数，例如：[1, 2, 3]
+   * @return 批量删除结果提示，成功返回“批量删除成功”，失败返回“批量删除失败”
    */
   @DeleteMapping("/deleteBatch")
-  public String deleteBatch(@RequestBody List<Long> ids) {
+  public Result<Void> deleteBatch(@RequestBody List<Long> ids) {
     boolean success = roleService.removeByIds(ids);
-    return success ? "批量删除成功" : "批量删除失败";
+    return success ? Result.success("批量删除成功") : Result.error("批量删除失败");
   }
 
   /**
-   * 修改角色
+   * 修改角色信息
    *
-   * @param role 角色信息
+   * @param role 角色信息，必须包含角色ID
+   * @return 操作结果
    */
   @PutMapping("/update")
-  public String update(@RequestBody Role role) {
+  public Result<Void> update(@RequestBody Role role) {
     boolean success = roleService.updateById(role);
-    return success ? "修改成功" : "修改失败";
+    return success ? Result.success("修改角色成功") : Result.error("修改角色失败");
   }
 
   /**
-   * 根据ID查询角色
+   * 根据角色ID查询角色详情
    *
-   * @param id 角色id
+   * @param id 角色ID
+   * @return 角色详情
    */
   @GetMapping("/get/{id}")
-  public Role getById(@PathVariable Long id) {
-    return roleService.getById(id);
+  public Result<Role> getById(@PathVariable Long id) {
+    Role role = roleService.getById(id);
+    return Result.success(role);
   }
 
   /**
-   * 查询所有角色
+   * 查询所有角色列表
    *
-   * @return 所有角色信息列表
+   * @return 角色列表
    */
   @GetMapping("/list")
-  public List<Role> list() {
-    return roleService.list();
+  public Result<List<Role>> list() {
+    List<Role> list = roleService.list();
+    return Result.success(list);
   }
 }
