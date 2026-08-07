@@ -66,8 +66,8 @@ public class MybatisPlusCodeGenerator {
                     // 父包名
                     .parent("com.company.mybatisplus")
                     // 模块名 默认值: 无
-                    // .moduleName("")
-                    .moduleName("system")
+                    .moduleName("")
+                    // .moduleName("system")
                     // Entity 包名
                     .entity("entity")
                     // Mapper 包名
@@ -86,10 +86,13 @@ public class MybatisPlusCodeGenerator {
             builder -> {
 
               // 设置需要生成的表
-               builder.addInclude(tables);
+              builder.addInclude(tables);
 
               // 如果希望去掉表前缀，例如 sys_user 生成 User，可以打开下面配置
               builder.addTablePrefix("sys_");
+
+              // 增加过滤表后缀，例如 users 生成 User，可以打开下面配置
+              builder.addTableSuffix("s");
 
               // Entity 策略
               builder
@@ -98,6 +101,8 @@ public class MybatisPlusCodeGenerator {
                   .enableLombok()
                   // 生成字段注解 @TableField
                   .enableTableFieldAnnotation()
+                  // 逻辑删除字段
+                  .logicDeleteColumnName("deleted")
                   // 表名下划线转驼峰
                   .naming(NamingStrategy.underline_to_camel)
                   // 字段名下划线转驼峰
@@ -110,7 +115,9 @@ public class MybatisPlusCodeGenerator {
               builder
                   .controllerBuilder()
                   // 生成 @RestController
-                  .enableRestStyle();
+                  .enableRestStyle()
+                  // URL 中使用连字符
+                  .enableHyphenStyle();
 
               // Service 策略
               builder
