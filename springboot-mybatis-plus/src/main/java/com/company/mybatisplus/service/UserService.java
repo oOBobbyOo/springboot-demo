@@ -1,5 +1,7 @@
 package com.company.mybatisplus.service;
 
+import com.company.mybatisplus.common.PageResult;
+import com.company.mybatisplus.dto.UserQuery;
 import com.company.mybatisplus.entity.User;
 import com.baomidou.mybatisplus.spring.service.IService;
 
@@ -57,4 +59,12 @@ public interface UserService extends IService<User> {
      * @return 用户列表
      */
     List<User> getUserList();
+
+    /**
+     * 分页条件查询用户
+     *
+     * @param query 查询条件
+     * @return 分页结果
+     */
+    PageResult<User> getUserPage(UserQuery query);
 }

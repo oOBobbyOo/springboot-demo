@@ -1,8 +1,12 @@
 package com.company.mybatisplus.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
+import com.company.mybatisplus.common.PageResult;
 import com.company.mybatisplus.common.ResultCode;
+import com.company.mybatisplus.dto.RoleQuery;
 import com.company.mybatisplus.entity.Role;
 import com.company.mybatisplus.entity.User;
 import com.company.mybatisplus.exception.BusinessException;
@@ -11,6 +15,7 @@ import com.company.mybatisplus.service.RoleService;
 import com.company.mybatisplus.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -185,5 +190,34 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     @Override
     public List<Role> getRoleList() {
         return this.list();
+    }
+
+    /**
+     * 分页条件查询角色
+     *
+     * @param query 查询条件
+     * @return 分页结果
+     */
+    @Override
+    public PageResult<Role> getRolePage(RoleQuery query) {
+        // 构建查询条件
+        LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<Role>()
+                .like(StringUtils.hasText(query.getRoleName()), Role::getRoleName, query.getRoleName())
+                .like(StringUtils.hasText(query.getRoleCode()), Role::getRoleCode, query.getRoleCode())
+                .eq(query.getStatus() != null, Role::getStatus, query.getStatus())
+                .orderByDesc(Role::getCreateTime);
+
+        // 分页查询
+        Page<Role> page = new Page<>(query.getPageNum(), query.getPageSize());
+        IPage<Role> iPage = this.page(page, wrapper);
+
+        // 封装分页结果
+        return new PageResult<>(
+                iPage.getCurrent(),
+                iPage.getSize(),
+                iPage.getTotal(),
+                iPage.getPages(),
+                iPage.getRecords()
+        );
     }
 }

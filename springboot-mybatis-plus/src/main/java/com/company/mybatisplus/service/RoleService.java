@@ -1,6 +1,8 @@
 package com.company.mybatisplus.service;
 
 import com.baomidou.mybatisplus.spring.service.IService;
+import com.company.mybatisplus.common.PageResult;
+import com.company.mybatisplus.dto.RoleQuery;
 import com.company.mybatisplus.entity.Role;
 
 import java.util.List;
@@ -55,4 +57,12 @@ public interface RoleService extends IService<Role> {
      * @return 角色列表
      */
     List<Role> getRoleList();
+
+    /**
+     * 分页条件查询角色
+     *
+     * @param query 查询条件
+     * @return 分页结果
+     */
+    PageResult<Role> getRolePage(RoleQuery query);
 }

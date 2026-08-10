@@ -1,6 +1,8 @@
 package com.company.mybatisplus.controller;
 
+import com.company.mybatisplus.common.PageResult;
 import com.company.mybatisplus.common.Result;
+import com.company.mybatisplus.dto.RoleQuery;
 import com.company.mybatisplus.entity.Role;
 import com.company.mybatisplus.service.RoleService;
 
@@ -94,5 +96,17 @@ public class RoleController {
     public Result<List<Role>> list() {
         List<Role> roles = roleService.getRoleList();
         return Result.success(roles);
+    }
+
+    /**
+     * 分页条件查询角色
+     *
+     * @param query 查询条件
+     * @return 统一分页结果
+     */
+    @GetMapping("/page")
+    public Result<PageResult<Role>> page(RoleQuery query) {
+        PageResult<Role> pageResult = roleService.getRolePage(query);
+        return Result.success(pageResult);
     }
 }
