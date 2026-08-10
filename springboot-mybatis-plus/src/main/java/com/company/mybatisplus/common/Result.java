@@ -14,12 +14,6 @@ import lombok.Data;
 @Data
 public class Result<T> {
 
-  /** 成功状态码 */
-  public static final int SUCCESS_CODE = 200;
-
-  /** 失败状态码 */
-  public static final int ERROR_CODE = 500;
-
   /**
    * 响应状态码
    *
@@ -56,7 +50,7 @@ public class Result<T> {
    * @return 成功结果
    */
   public static <T> Result<T> success() {
-    return new Result<>(SUCCESS_CODE, "操作成功", null);
+    return new Result<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), null);
   }
 
   /**
@@ -67,7 +61,7 @@ public class Result<T> {
    * @return 成功结果
    */
   public static <T> Result<T> success(T data) {
-    return new Result<>(SUCCESS_CODE, "操作成功", data);
+    return new Result<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), data);
   }
 
   /**
@@ -79,7 +73,7 @@ public class Result<T> {
    * @return 成功结果
    */
   public static <T> Result<T> success(String message, T data) {
-    return new Result<>(SUCCESS_CODE, message, data);
+    return new Result<>(ResultCode.SUCCESS.getCode(), message, data);
   }
 
   /**
@@ -90,7 +84,7 @@ public class Result<T> {
    * @return 成功结果
    */
   public static <T> Result<T> success(String message) {
-    return new Result<>(SUCCESS_CODE, message, null);
+    return new Result<>(ResultCode.SUCCESS.getCode(), message, null);
   }
 
   /**
@@ -100,7 +94,7 @@ public class Result<T> {
    * @return 失败结果
    */
   public static <T> Result<T> error() {
-    return new Result<>(ERROR_CODE, "操作失败", null);
+    return new Result<>(ResultCode.INTERNAL_ERROR.getCode(), "操作失败", null);
   }
 
   /**
@@ -111,7 +105,7 @@ public class Result<T> {
    * @return 失败结果
    */
   public static <T> Result<T> error(String message) {
-    return new Result<>(ERROR_CODE, message, null);
+    return new Result<>(ResultCode.INTERNAL_ERROR.getCode(), message, null);
   }
 
   /**
