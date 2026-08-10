@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -40,12 +41,14 @@ public class Role implements Serializable {
      * 角色名称
      */
     @TableField("role_name")
+    @NotBlank(message = "角色名称不能为空")
     private String roleName;
 
     /**
      * 角色编码
      */
     @TableField("role_code")
+    @NotBlank(message = "角色编码不能为空")
     private String roleCode;
 
     /**

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -40,11 +42,14 @@ public class User implements Serializable {
      * 用户名
      */
     @TableField("user_name")
+    @NotBlank(message = "用户名不能为空")
+    @Size(min = 3, max = 20, message = "用户名长度3-20个字符")
     private String userName;
 
     /**
      * 密码
      */
+    @NotBlank(message = "密码不能为空")
     @TableField("password")
     private String password;
 
