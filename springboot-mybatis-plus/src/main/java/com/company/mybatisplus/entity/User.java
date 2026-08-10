@@ -60,6 +60,12 @@ public class User implements Serializable {
     private String nickName;
 
     /**
+     * 角色ID
+     */
+    @TableField("role_id")
+    private Long roleId;
+
+    /**
      * 状态：0禁用，1启用
      */
     @TableField("status")

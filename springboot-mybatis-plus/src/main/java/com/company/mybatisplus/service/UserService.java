@@ -3,6 +3,8 @@ package com.company.mybatisplus.service;
 import com.company.mybatisplus.entity.User;
 import com.baomidou.mybatisplus.spring.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户表 服务类
@@ -12,6 +14,7 @@ import com.baomidou.mybatisplus.spring.service.IService;
  * @since 2026-08-07
  */
 public interface UserService extends IService<User> {
+
     /**
      * 新增用户
      *
@@ -34,10 +37,24 @@ public interface UserService extends IService<User> {
     void deleteUser(Long id);
 
     /**
+     * 批量删除用户
+     *
+     * @param ids 用户ID集合
+     */
+    void deleteBatchUsers(List<Long> ids);
+
+    /**
      * 根据ID查询用户
      *
      * @param id 用户ID
      * @return 用户信息
      */
     User getUserById(Long id);
+
+    /**
+     * 查询所有用户列表
+     *
+     * @return 用户列表
+     */
+    List<User> getUserList();
 }
