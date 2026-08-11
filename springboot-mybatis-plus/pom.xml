@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>26</java.version>
+        <mybatis-plus.version>3.5.17</mybatis-plus.version>
     </properties>
     <dependencies>
         <dependency>
@@ -27,28 +28,28 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
-            <version>3.5.17</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
 
-        <!--  MyBatis-Plus 分页插件 -->
+        <!--  MyBatis-Plus 插件 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-jsqlparser</artifactId>
-            <version>3.5.17</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
 
         <!-- MyBatis-Plus 代码生成器 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.17</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
 
         <!-- MyBatis-Plus 扩展包 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
-            <version>3.5.17</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
 
         <!-- 模板引擎：Velocity -->
