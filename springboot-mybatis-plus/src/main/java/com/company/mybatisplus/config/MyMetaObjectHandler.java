@@ -15,7 +15,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
 
-  /** 插入时自动填充 */
+  /**
+   * 插入时自动填充
+   *
+   * <p>执行 insert、save、saveBatch 等新增方法时会进入该方法。
+   *
+   * @param metaObject 元对象，可以获取当前实体类字段信息
+   */
   @Override
   public void insertFill(MetaObject metaObject) {
     log.info("开始插入填充...");
@@ -23,6 +29,13 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     this.strictInsertFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
   }
 
+  /**
+   * 更新时自动填充
+   *
+   * <p>执行 updateById、update、updateBatchById 等更新方法时会进入该方法。
+   *
+   * @param metaObject 元对象，可以获取当前实体类字段信息
+   */
   @Override
   public void updateFill(MetaObject metaObject) {
     log.info("开始更新填充...");
