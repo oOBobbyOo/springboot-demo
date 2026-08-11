@@ -11,8 +11,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serial;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -26,7 +24,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @TableName("roles")
-public class Role implements Serializable {
+public class Role extends Base {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -69,16 +67,4 @@ public class Role implements Serializable {
      */
     @TableField("remark")
     private String remark;
-
-    /**
-     * 创建时间
-     */
-    @TableField("create_time")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField("update_time")
-    private LocalDateTime updateTime;
 }

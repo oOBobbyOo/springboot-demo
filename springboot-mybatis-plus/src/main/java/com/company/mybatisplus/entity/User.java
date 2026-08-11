@@ -12,8 +12,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serial;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -27,7 +25,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @TableName("users")
-public class User implements Serializable {
+public class User extends Base {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -77,16 +75,4 @@ public class User implements Serializable {
     @TableLogic
     @TableField("deleted")
     private Byte deleted;
-
-    /**
-     * 创建时间
-     */
-    @TableField("create_time")
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField("update_time")
-    private LocalDateTime updateTime;
 }
