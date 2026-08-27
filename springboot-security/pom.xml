@@ -30,6 +30,20 @@
             <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
 
+        <!-- MyBatis-Plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
+            <version>3.5.17</version>
+        </dependency>
+
+        <!--  MyBatis-Plus 插件 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-jsqlparser</artifactId>
+            <version>3.5.17</version>
+        </dependency>
+
         <!-- MySQL 驱动 -->
         <dependency>
             <groupId>com.mysql</groupId>
