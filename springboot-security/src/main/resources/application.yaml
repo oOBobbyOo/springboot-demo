@@ -5,4 +5,15 @@ spring:
   application:
     name: springboot-security
 
-
+jwt:
+  # 生产环境必须使用强随机字符串（建议 64 位以上），并通过配置中心/环境变量注入
+  # 可以使用命令生成: openssl rand -base64 64
+  secret: "YourSuperSecretKeyForHmacSha256MustBeAtLeast32BytesLong!!!"
+  # Access Token 有效期 (单位: 毫秒)。如 2 小时 (7200000)
+  expiration: 7200000
+  # Refresh Token 有效期 (单位: 毫秒)。如 7 天 (604800000)
+  refresh-expiration: 604800000
+  # Token 请求头名称
+  header: "Authorization"
+  # Token 前缀
+  prefix: "Bearer "
