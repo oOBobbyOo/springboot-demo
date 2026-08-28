@@ -1,9 +1,12 @@
 package com.company.security.config;
 
+import com.company.security.filter.JwtAuthenticationFilter;
 import com.company.security.handler.CustomAccessDeniedHandler;
 import com.company.security.handler.CustomAuthenticationEntryPoint;
 import java.util.Arrays;
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,6 +21,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -35,7 +39,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+  private final JwtAuthenticationFilter jwtAuthenticationFilter;
+  private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+  private final CustomAccessDeniedHandler accessDeniedHandler;
 
   /**
    * 白名单路径配置 <br>
@@ -103,9 +112,9 @@ public class SecurityConfig {
             exceptions ->
                 exceptions
                     // 处理 401 未认证（如 Token 过期、未携带 Token）
-                    .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                    .authenticationEntryPoint(authenticationEntryPoint)
                     // 处理 403 未授权（如 权限不足、角色不匹配）
-                    .accessDeniedHandler(new CustomAccessDeniedHandler()))
+                    .accessDeniedHandler(accessDeniedHandler))
 
         // 【6：安全响应头 (Headers)】
         // 开启基础的安全头防御，防止 XSS、点击劫持等常见 Web 攻击。
@@ -115,12 +124,12 @@ public class SecurityConfig {
                     .frameOptions(HeadersConfigurer.FrameOptionsConfig::deny) // 禁止被 iframe 嵌套，防点击劫持
                     .contentTypeOptions(content -> {}) // 禁用浏览器 MIME 类型嗅探
                     .xssProtection(xss -> {}) // 开启 XSS 过滤
-            );
+            )
 
     // 【7：注入自定义 JWT 过滤器】
     // 在 Spring Security 原生的 UsernamePasswordAuthenticationFilter 之前执行。
     // 负责拦截请求、解析 JWT、校验签名/有效期，并将用户信息塞入 SecurityContext。
-    // .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+     .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }
