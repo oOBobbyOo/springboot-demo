@@ -3,14 +3,15 @@ package com.company.security.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Henry
  */
-@Data
+@Getter
+@Setter
 @TableName("sys_user")
 public class User extends Base {
 
@@ -63,7 +64,7 @@ public class User extends Base {
     private Integer gender;
 
     /**
-     * 帐号状态 (0:正常, 1:停用)
+     * 帐号状态 (0:停用, 1:正常)
      * 区分于 BaseEntity 中的 deleted (逻辑删除)。
      * 停用是指账号存在但禁止登录，删除是指数据彻底失效。
      */

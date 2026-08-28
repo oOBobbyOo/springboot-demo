@@ -2,6 +2,7 @@ package com.company.security.service;
 
 import com.company.security.dto.LoginDTO;
 import com.company.security.dto.RegisterDTO;
+import com.company.security.vo.LoginVO;
 
 /**
  * 认证服务接口
@@ -13,9 +14,9 @@ public interface AuthService {
    /**
     * 用户登录
     * @param dto 登录参数
-    * @return JWT Token
+    * @return 双 Token (Access Token + Refresh Token)
     */
-   String login(LoginDTO dto);
+   LoginVO login(LoginDTO dto);
 
 
    /**
