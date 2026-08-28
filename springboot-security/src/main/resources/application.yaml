@@ -42,7 +42,12 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
       # 表名前缀配置 (如果表名是 sys_user，实体是 User，可配置 prefix: sys_)
-      # table-prefix: sys_
+      table-prefix: sys_
+
+logging:
+  level:
+    org.springframework.web.cors: DEBUG
+    org.springframework.security.web: DEBUG
 
 jwt:
   # 生产环境必须使用强随机字符串（建议 64 位以上），并通过配置中心/环境变量注入

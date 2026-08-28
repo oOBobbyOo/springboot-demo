@@ -79,8 +79,8 @@ public class User extends Base {
     /**
      * 最后登录时间
      */
-    @TableField("login_date")
-    private LocalDateTime loginDate;
+    @TableField("login_time")
+    private LocalDateTime loginTime;
 
     /**
      * 备注

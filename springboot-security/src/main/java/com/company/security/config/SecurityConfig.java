@@ -1,10 +1,9 @@
 package com.company.security.config;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.company.security.handler.CustomAccessDeniedHandler;
 import com.company.security.handler.CustomAuthenticationEntryPoint;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,7 +18,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -119,10 +117,10 @@ public class SecurityConfig {
                     .xssProtection(xss -> {}) // 开启 XSS 过滤
             );
 
-        // 【7：注入自定义 JWT 过滤器】
-        // 在 Spring Security 原生的 UsernamePasswordAuthenticationFilter 之前执行。
-        // 负责拦截请求、解析 JWT、校验签名/有效期，并将用户信息塞入 SecurityContext。
-        // .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    // 【7：注入自定义 JWT 过滤器】
+    // 在 Spring Security 原生的 UsernamePasswordAuthenticationFilter 之前执行。
+    // 负责拦截请求、解析 JWT、校验签名/有效期，并将用户信息塞入 SecurityContext。
+    // .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }
@@ -157,7 +155,9 @@ public class SecurityConfig {
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
     // 生产环境应替换为具体的前端域名，如 https://admin.yourcompany.com
-    configuration.setAllowedOrigins(List.of("http://localhost:8085", "https://your-domain.com"));
+    configuration.setAllowedOrigins(List.of("https://your-domain.com"));
+    // 用于开发环境或特殊场景（支持通配符 "*"）
+    configuration.setAllowedOriginPatterns(List.of("http://localhost:*", "chrome-extension://*"));
     // 允许的 HTTP 方法
     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     // 允许的请求头
