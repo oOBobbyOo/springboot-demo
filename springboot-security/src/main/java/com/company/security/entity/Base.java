@@ -1,6 +1,7 @@
 package com.company.security.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 /**
  * @author Henry
  */
+@Data
 public class Base implements Serializable {
 
    /**

@@ -1,13 +1,17 @@
 package com.company.security.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
 /**
  * @author Henry
  */
+@Data
+@TableName("sys_user")
 public class User extends Base {
 
     /**
