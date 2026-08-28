@@ -6,6 +6,7 @@ import com.company.security.dto.RegisterDTO;
 import com.company.security.entity.User;
 import com.company.security.mapper.UserMapper;
 import com.company.security.service.AuthService;
+import com.company.security.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,7 @@ public class AuthServiceImpl implements AuthService {
 
   private final UserMapper userMapper;
   private final PasswordEncoder passwordEncoder;
+  private final JwtUtils jwtUtils;
 
   @Override
   public String login(LoginDTO dto) {
