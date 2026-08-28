@@ -1,9 +1,10 @@
 package com.company.security.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.company.security.common.Result;
+import com.company.security.dto.LoginDTO;
+import com.company.security.dto.RegisterDTO;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Henry
@@ -12,8 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    @PostMapping("/login")
+    public Result<Void> login(@Valid @RequestBody LoginDTO dto) {
+        return Result.success();
+    }
+
+    @PostMapping("/register")
+    public Result<Void> register(@Valid @RequestBody RegisterDTO dto) {
+        return Result.success();
     }
 }
