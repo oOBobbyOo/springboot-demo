@@ -8,6 +8,19 @@ spring:
     # 激活的环境 (dev/test/prod)
     active: dev
 
+  # Spring Boot DevTools 热部署配置
+  devtools:
+    restart:
+      # 修改代码后自动重启 (生产环境建议关闭)
+      enabled: true
+      # 额外监听的目录 (默认只监听 classpath，这里加入 Java 源码目录)
+      additional-paths: src/main/java
+      # 排除不改触发重启的资源 (默认已排除 /META-INF、/static、/public、/templates)
+      exclude: static/**, public/**, templates/**
+    livereload:
+      # 模板/静态文件变更后自动刷新浏览器
+      enabled: true
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mybatis_db?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
