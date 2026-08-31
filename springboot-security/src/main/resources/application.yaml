@@ -1,5 +1,12 @@
 server:
   port: 8085
+  tomcat:
+    # Tomcat 调优
+    threads:
+      max: 200         # 最大工作线程数
+      min-spare: 20    # 最小空闲线程数
+    accept-count: 100  # 等待队列长度
+    max-connections: 8192
 
 spring:
   application:
@@ -21,6 +28,7 @@ spring:
       # 模板/静态文件变更后自动刷新浏览器
       enabled: true
 
+  # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mybatis_db?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
@@ -35,7 +43,7 @@ spring:
       max-lifetime: 1800000          # 连接最大存活时间 (30分钟，必须小于MySQL的wait_timeout)
       pool-name: EnterpriseHikariCP  # 连接池名称，便于日志监控
 
-
+# MyBatis-Plus 配置
 mybatis-plus:
   # 实体类扫描包路径
   type-aliases-package: com.company.**.entity
@@ -57,11 +65,13 @@ mybatis-plus:
       # 表名前缀配置 (如果表名是 sys_user，实体是 User，可配置 prefix: sys_)
       table-prefix: sys_
 
+# 日志配置
 logging:
   level:
     org.springframework.web.cors: DEBUG
     org.springframework.security.web: DEBUG
 
+# 自定义 JWT 配置
 jwt:
   # 生产环境必须使用强随机字符串（建议 64 位以上），并通过配置中心/环境变量注入
   # 可以使用命令生成: openssl rand -base64 64
