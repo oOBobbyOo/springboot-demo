@@ -1,7 +1,6 @@
 package com.company.security.controller;
 
 import com.company.security.common.Result;
-import com.company.security.entity.User;
 import com.company.security.service.UserService;
 import com.company.security.vo.UserVO;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +26,9 @@ public class UserController {
     * @return 统一响应结果
     */
    @GetMapping("/get/{id}")
-   public Result<User> getById(@PathVariable Long id) {
-      User user = userService.getUserById(id);
-      return Result.success(user);
+   public Result<UserVO> getById(@PathVariable Long id) {
+      UserVO userInfo = userService.getUserById(id);
+      return Result.success(userInfo);
    }
 
    /**

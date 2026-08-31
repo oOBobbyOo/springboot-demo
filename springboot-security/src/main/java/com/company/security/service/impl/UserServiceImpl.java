@@ -23,8 +23,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return 用户信息
      */
     @Override
-    public User getUserById(Long id) {
-        return this.getById(id);
+    public UserVO getUserById(Long id) {
+        User user = this.getById(id);
+        if (user == null) {
+            throw new BusinessException(404, "用户不存在");
+        }
+
+        return toUserVO(user);
     }
 
     /**

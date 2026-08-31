@@ -15,7 +15,7 @@ public interface UserService extends IService<User> {
      * @param id 用户ID
      * @return 用户信息
      */
-    User getUserById(Long id);
+    UserVO getUserById(Long id);
 
     /**
      * 获取当前登录用户信息
