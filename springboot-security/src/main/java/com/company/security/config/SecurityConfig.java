@@ -146,9 +146,9 @@ public class SecurityConfig {
 
   /**
    * 认证管理器 <br>
-   * 暴露 AuthenticationManager <br>
-   * 在自定义的 AuthService 中，需要手动调用 AuthenticationManager 来触发认证流程， <br>
-   * 从而利用 Security 提供的密码校验和 UserDetailsService 机制。
+   * 暴露 AuthenticationManager，供 AuthServiceImpl.login() 调用 authenticate() 触发标准认证流程。 <br>
+   * 由于上下文中存在唯一的 UserDetailsService + PasswordEncoder Bean，Spring Security 会自动装配 <br>
+   * DaoAuthenticationProvider，统一完成密码校验（PasswordEncoder）与账号状态校验（UserDetails.isEnabled）。
    */
   @Bean
   public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
