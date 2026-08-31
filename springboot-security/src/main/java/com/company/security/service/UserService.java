@@ -2,6 +2,7 @@ package com.company.security.service;
 
 import com.baomidou.mybatisplus.spring.service.IService;
 import com.company.security.entity.User;
+import com.company.security.vo.UserVO;
 
 /**
  * @author Henry
@@ -15,4 +16,11 @@ public interface UserService extends IService<User> {
      * @return 用户信息
      */
     User getUserById(Long id);
+
+    /**
+     * 获取当前登录用户信息
+     *
+     * @return 当前登录用户信息
+     */
+    UserVO getCurrentUserInfo();
 }

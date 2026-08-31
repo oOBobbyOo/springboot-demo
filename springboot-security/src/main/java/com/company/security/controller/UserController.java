@@ -3,6 +3,7 @@ package com.company.security.controller;
 import com.company.security.common.Result;
 import com.company.security.entity.User;
 import com.company.security.service.UserService;
+import com.company.security.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,5 +30,14 @@ public class UserController {
    public Result<User> getById(@PathVariable Long id) {
       User user = userService.getUserById(id);
       return Result.success(user);
+   }
+
+   /**
+    * 获取当前登录用户信息
+    * @return 用户信息
+    */
+   @GetMapping("/info")
+   public Result<UserVO> getUserInfo() {
+      return Result.success(userService.getCurrentUserInfo());
    }
 }
