@@ -1,4 +1,4 @@
-package com.company.mybatis;
+package com.company.redis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,9 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Henry
  */
 @SpringBootApplication
-public class MybatisApplication {
+public class RedisApplication {
 
-  static void main(String[] args) {
-    SpringApplication.run(MybatisApplication.class, args);
-  }
+	public static void main(String[] args) {
+		SpringApplication.run(RedisApplication.class, args);
+	}
+
 }
