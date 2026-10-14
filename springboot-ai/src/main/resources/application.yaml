@@ -1,0 +1,16 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: springboot-ai
+
+  ai:
+    anthropic:
+      api-key: ${ANTHROPIC_AUTH_TOKEN}
+      base-url: ${ANTHROPIC_BASE_URL}
+      chat:
+        model: ${ANTHROPIC_MODEL}
+
+
+
