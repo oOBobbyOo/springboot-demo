@@ -1,7 +1,8 @@
 package com.company.springbootai.controller;
 
+import com.company.springbootai.dto.AiMessage;
+import com.company.springbootai.service.AiService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,24 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/ai")
 public class AiController {
 
-    private final ChatClient chatClient;
+    private final AiService aiService;
 
-    public AiController(ChatClient.Builder chatClientBuilder) {
-        this.chatClient = chatClientBuilder.build();
+    public AiController(AiService aiService) {
+        this.aiService = aiService;
     }
 
     @PostMapping("/chat")
-    public String chat(@RequestBody ChatRequest request) {
-        String content = chatClient.prompt()
-                .user(request.message())
-                .call()
-                .content();
+    public String chat(@RequestBody AiMessage message) {
+        String content = aiService.getAiResponse(message);
 
-        log.info("ai response: {}", content);
+        log.info("aiService response: {}", content);
 
         return content;
     }
 
-    public record ChatRequest(String message) {
-    }
+
 }
