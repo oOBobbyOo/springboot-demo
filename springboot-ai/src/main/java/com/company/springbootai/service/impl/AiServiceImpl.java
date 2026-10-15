@@ -2,6 +2,7 @@ package com.company.springbootai.service.impl;
 
 import com.company.springbootai.dto.AiMessage;
 import com.company.springbootai.service.AiService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -10,13 +11,10 @@ import reactor.core.publisher.Flux;
  * @author Henry
  */
 @Service
+@RequiredArgsConstructor
 public class AiServiceImpl implements AiService {
 
   private final ChatClient chatClient;
-
-  public AiServiceImpl(ChatClient chatClient) {
-    this.chatClient = chatClient;
-  }
 
   @Override
   public String getAiResponse(AiMessage message) {
