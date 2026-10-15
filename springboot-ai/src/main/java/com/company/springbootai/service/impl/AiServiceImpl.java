@@ -2,9 +2,9 @@ package com.company.springbootai.service.impl;
 
 import com.company.springbootai.dto.ChatRequest;
 import com.company.springbootai.service.AiService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -12,10 +12,16 @@ import reactor.core.publisher.Flux;
  * @author Henry
  */
 @Service
-@RequiredArgsConstructor
 public class AiServiceImpl implements AiService {
 
   private final ChatClient chatClient;
+  private final ChatClient codeExpertChatClient;
+
+  public AiServiceImpl(ChatClient chatClient,
+                       @Qualifier("codeExpertChatClient") ChatClient codeExpertChatClient) {
+    this.chatClient = chatClient;
+    this.codeExpertChatClient = codeExpertChatClient;
+  }
 
   /**
    * 同步调用大模型，等待返回完整回复
@@ -39,6 +45,21 @@ public class AiServiceImpl implements AiService {
   @Override
   public Flux<String> getAiStreamResponse(ChatRequest request) {
     return prompt(request)
+            .stream()
+            .content();
+  }
+
+  /**
+   * 调用代码专家大模型流式获取回复内容，并通过会话ID保留多轮记忆
+   *
+   * @param request 会话ID与用户输入的消息
+   * @return 代码专家模型逐段返回的文本内容
+   */
+  @Override
+  public Flux<String> getCodeExpertStreamResponse(ChatRequest request) {
+    return codeExpertChatClient.prompt()
+            .user(request.message())
+            .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, request.conversationId()))
             .stream()
             .content();
   }

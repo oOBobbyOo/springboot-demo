@@ -44,5 +44,14 @@ public class AiController {
                 .doOnNext(chunk -> log.info("aiService stream chunk: {}", chunk));
     }
 
+    /**
+     * 代码专家流式对话（SSE）
+     */
+    @PostMapping(value = "/code-expert/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> codeExpertStream(@Valid @RequestBody ChatRequest request) {
+        return aiService.getCodeExpertStreamResponse(request)
+                .doOnNext(chunk -> log.info("codeExpert stream chunk: {}", chunk));
+    }
+
 
 }
