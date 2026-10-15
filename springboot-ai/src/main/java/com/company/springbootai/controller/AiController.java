@@ -1,7 +1,8 @@
 package com.company.springbootai.controller;
 
 import com.company.springbootai.common.Result;
-import com.company.springbootai.dto.AiMessage;
+import com.company.springbootai.dto.ChatRequest;
+import com.company.springbootai.dto.ChatResponse;
 import com.company.springbootai.service.AiService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,18 +29,18 @@ public class AiController {
      * 同步对话
      */
     @PostMapping("/chat")
-    public Result<String> chat(@Valid @RequestBody AiMessage message) {
-        String content = aiService.getAiResponse(message);
+    public Result<ChatResponse> chat(@Valid @RequestBody ChatRequest request) {
+        String content = aiService.getAiResponse(request);
         log.info("aiService response: {}", content);
-        return Result.success(content);
+        return Result.success(new ChatResponse(request.conversationId(), content));
     }
 
     /**
      * 流式对话（SSE）
      */
     @PostMapping(value = "/chat/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> chatStream(@Valid @RequestBody AiMessage message) {
-        return aiService.getAiStreamResponse(message)
+    public Flux<String> chatStream(@Valid @RequestBody ChatRequest request) {
+        return aiService.getAiStreamResponse(request)
                 .doOnNext(chunk -> log.info("aiService stream chunk: {}", chunk));
     }
 

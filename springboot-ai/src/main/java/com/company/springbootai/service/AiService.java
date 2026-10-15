@@ -1,6 +1,6 @@
 package com.company.springbootai.service;
 
-import com.company.springbootai.dto.AiMessage;
+import com.company.springbootai.dto.ChatRequest;
 import reactor.core.publisher.Flux;
 
 /**
@@ -10,16 +10,16 @@ public interface AiService {
   /**
    * 调用大模型获取回复内容
    *
-   * @param message 用户输入的消息
+   * @param request 会话ID与用户输入的消息
    * @return 模型返回的文本内容
    */
-  String getAiResponse(AiMessage message);
+  String getAiResponse(ChatRequest request);
 
   /**
    * 调用大模型流式获取回复内容
    *
-   * @param message 用户输入的消息
+   * @param request 会话ID与用户输入的消息
    * @return 模型逐段返回的文本内容
    */
-  Flux<String> getAiStreamResponse(AiMessage message);
+  Flux<String> getAiStreamResponse(ChatRequest request);
 }
