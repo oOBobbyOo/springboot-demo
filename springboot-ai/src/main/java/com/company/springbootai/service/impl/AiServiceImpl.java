@@ -14,8 +14,8 @@ public class AiServiceImpl implements AiService {
 
   private final ChatClient chatClient;
 
-  public AiServiceImpl(ChatClient.Builder chatClientBuilder) {
-    this.chatClient = chatClientBuilder.build();
+  public AiServiceImpl(ChatClient chatClient) {
+    this.chatClient = chatClient;
   }
 
   @Override
